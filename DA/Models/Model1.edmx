@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="AdventureWorksDW2019Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'AdventureWorksDW2019.dbo.vTimeSeries' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vTimeSeries">
+          <Key>
+            <PropertyRef Name="CalendarYear" />
+            <PropertyRef Name="Month" />
+          </Key>
+          <Property Name="ModelRegion" Type="nvarchar" MaxLength="56" />
+          <Property Name="TimeIndex" Type="int" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Amount" Type="money" />
+          <Property Name="CalendarYear" Type="smallint" Nullable="false" />
+          <Property Name="Month" Type="tinyint" Nullable="false" />
+          <Property Name="ReportingDate" Type="datetime" />
+        </EntityType>
+        <EntityContainer Name="AdventureWorksDW2019ModelStoreContainer">
+          <EntitySet Name="vTimeSeries" EntityType="Self.vTimeSeries" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vTimeSeries].[ModelRegion] AS [ModelRegion], 
+    [vTimeSeries].[TimeIndex] AS [TimeIndex], 
+    [vTimeSeries].[Quantity] AS [Quantity], 
+    [vTimeSeries].[Amount] AS [Amount], 
+    [vTimeSeries].[CalendarYear] AS [CalendarYear], 
+    [vTimeSeries].[Month] AS [Month], 
+    [vTimeSeries].[ReportingDate] AS [ReportingDate]
+    FROM [dbo].[vTimeSeries] AS [vTimeSeries]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AdventureWorksDW2019Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="vTimeSeries">
+          <Key>
+            <PropertyRef Name="CalendarYear" />
+            <PropertyRef Name="Month" />
+          </Key>
+          <Property Name="ModelRegion" Type="String" MaxLength="56" FixedLength="false" Unicode="true" />
+          <Property Name="TimeIndex" Type="Int32" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="CalendarYear" Type="Int16" Nullable="false" />
+          <Property Name="Month" Type="Byte" Nullable="false" />
+          <Property Name="ReportingDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="AdventureWorksEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="vTimeSeries" EntityType="Self.vTimeSeries" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AdventureWorksDW2019ModelStoreContainer" CdmEntityContainer="AdventureWorksEntities">
+          <EntitySetMapping Name="vTimeSeries">
+            <EntityTypeMapping TypeName="AdventureWorksDW2019Model.vTimeSeries">
+              <MappingFragment StoreEntitySet="vTimeSeries">
+                <ScalarProperty Name="ModelRegion" ColumnName="ModelRegion" />
+                <ScalarProperty Name="TimeIndex" ColumnName="TimeIndex" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="CalendarYear" ColumnName="CalendarYear" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="ReportingDate" ColumnName="ReportingDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
